@@ -26,3 +26,24 @@ describe("Address Book", function() {
     expect(addressBook.getContact(0)).not.toBeDefined();
   });
 });
+
+//lisan uue kirje asünkroonse kontaktilisamise jaoks
+describe("Async Address Book", function() {
+  var addressBook = new AddressBook();
+
+  //lisan funktsiooni, millega iga funktsiooni eel on päring märgitud lõpetatuks
+  beforeEach(function(done) {
+    //lisan meetodi, millega kontakte asünkroonselt lisada saan
+    addressBook.getInitialContacts(function() {
+      //kutsun välja done funktsiooni, mis annab meie funktsioonile teada, et asünkroonne päring on lõpetatud
+      done();
+    });
+  });
+  //annan ka siin sisendiks done
+  it("should grab initial contacts", function(done) {
+    //eeldan, et kontaktide lisamine õnnestus
+    expect(addressBook.initialComplete).toBe(true);
+    //kutsun välja done funktsiooni
+    done();
+  });
+});
