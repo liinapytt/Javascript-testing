@@ -14,3 +14,8 @@ AddressBook.prototype.getContact = function(index) {
   //tagastab sisestatud indeksinumbriga massiivi liikme
   return this.contacts[index];
 };
+//loon funktsioon kontaktide kustutamiseks
+AddressBook.prototype.deleteContact = function(index) {
+  //kustutab sisestatud indeksinumbriga massiivi liikme
+  this.contacts.splice(index, 1);
+};
