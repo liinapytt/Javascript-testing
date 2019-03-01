@@ -2,7 +2,21 @@
 function AddressBook() {
   //lisan uue property, mis defineerib kontaktide massiivi
   this.contacts = [];
+  //lisan property asünkroonse päringu tarvis
+  this.initialComplete = false;
 }
+
+//loon uue funktsiooni asünkroonse päringu kaudu andmete saamiseks
+AddressBook.prototype.getInitialContacts = function(cb) {
+  var self = this;
+
+  setTimeout(function() {
+    self.initialComplete = true;
+    if (cb) {
+      return cb();
+    }
+  }, 3);
+};
 
 //loon uue funktsiooni kontaktide lisamiseks, lisab uue kontakti ülalloodud masssiivi
 AddressBook.prototype.addContact = function(contact) {
